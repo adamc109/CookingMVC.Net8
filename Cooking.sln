@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookingWeb", "CookingWeb\CookingWeb.csproj", "{4E0563F6-796E-4FBE-A4FB-23CC18C1BC42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E0563F6-796E-4FBE-A4FB-23CC18C1BC42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0563F6-796E-4FBE-A4FB-23CC18C1BC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0563F6-796E-4FBE-A4FB-23CC18C1BC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0563F6-796E-4FBE-A4FB-23CC18C1BC42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23DB43B4-2A64-48CB-BDF6-ECF4EAD7EAB7}
+	EndGlobalSection
+EndGlobal
