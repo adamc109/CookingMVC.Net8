@@ -1,4 +1,4 @@
-﻿using CookingWeb.Models;
+﻿using Cooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

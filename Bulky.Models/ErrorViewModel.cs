@@ -1,4 +1,4 @@
-namespace CookingWeb.Models
+namespace Cooking.Models
 {
     public class ErrorViewModel
     {

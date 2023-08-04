@@ -1,4 +1,4 @@
-using CookingWeb.Data;
+using Cooking.DataAccess.Data1;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

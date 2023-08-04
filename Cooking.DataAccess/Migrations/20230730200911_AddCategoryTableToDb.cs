@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Cooking.DataAccess.Data1;
 
 #nullable disable
 
-namespace CookingWeb.Migrations
+namespace Cooking.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

@@ -1,15 +1,17 @@
-﻿using CookingWeb.Models;
+﻿using Cooking.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CookingWeb.Data
+
+namespace Cooking.DataAccess.Data1
+
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
-        { 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
 
         }
-        
+
         //creates table
         public DbSet<Category> Categories { get; set; }
 

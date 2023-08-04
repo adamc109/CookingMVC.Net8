@@ -1,6 +1,6 @@
-﻿using CookingWeb.Data;
-using CookingWeb.Models;
+﻿using Cooking.Models;
 using Microsoft.AspNetCore.Mvc;
+using Cooking.DataAccess.Data1;
 
 namespace CookingWeb.Controllers
 {
