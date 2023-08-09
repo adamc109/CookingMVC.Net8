@@ -1,10 +1,10 @@
 ﻿using Cooking.Models;
 using Microsoft.AspNetCore.Mvc;
-using Cooking.DataAccess.Data1;
 using Cooking.DataAccess.Repository.IRepository;
 
-namespace CookingWeb.Controllers
+namespace CookingWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         //connect to data from category using dbcontext
