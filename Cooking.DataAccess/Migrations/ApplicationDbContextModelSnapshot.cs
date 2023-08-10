@@ -21,7 +21,7 @@ namespace Cooking.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CookingWeb.Models.Category", b =>
+            modelBuilder.Entity("Cooking.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,8 @@ namespace Cooking.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -70,6 +71,51 @@ namespace Cooking.DataAccess.Migrations
                             Id = 5,
                             DisplayOrder = 5,
                             Name = "Snack"
+                        });
+                });
+
+            modelBuilder.Entity("Cooking.Models.Recipie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ingredients")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ListPrice")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Price100")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Price50")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recipies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ingredients = "Steak, chips",
+                            ListPrice = 10.0,
+                            Price = 10.0,
+                            Price100 = 5.0,
+                            Price50 = 8.0,
+                            Title = "Steak & Chips"
                         });
                 });
 #pragma warning restore 612, 618

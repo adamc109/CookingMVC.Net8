@@ -14,6 +14,7 @@ namespace Cooking.DataAccess.Data1
 
         //creates table
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Recipie> Recipies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,20 @@ namespace Cooking.DataAccess.Data1
                 new Category { Id = 3, Name = "Dinner", DisplayOrder = 3 },
                 new Category { Id = 4, Name = "Desert", DisplayOrder = 4 },
                 new Category { Id = 5, Name = "Snack", DisplayOrder = 5 }
+                );
+
+            modelBuilder.Entity<Recipie>().HasData(
+                new Recipie
+                {
+                    Id = 1,
+                    Title = "Steak & Chips",
+                    Ingredients = "Steak, chips",
+                    ListPrice = 10,
+                    Price = 10,
+                    Price50 = 8,
+                    Price100 = 5,
+
+                }
                 );
         }
 
