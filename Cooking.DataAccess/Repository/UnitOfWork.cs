@@ -13,10 +13,12 @@ namespace Cooking.DataAccess.Repository
     {
         private ApplicationDbContext _db;
         public ICategoryRepository Category { get; private set; }
+        public IRecipieRepository Recipie { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Recipie = new RecipieRepository(_db);
         }
 
 

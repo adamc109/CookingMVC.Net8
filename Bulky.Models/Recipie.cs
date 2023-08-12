@@ -16,10 +16,10 @@ namespace Cooking.Models
         [Required]
  
         public string Title { get; set; }
-        [Display (Name ="List Price")]
+        public string Ingredients { get; set; }
+        [Display(Name = "List Price")]
         [Range(1, 1000)]
         public double ListPrice { get; set; }
-        public string Ingredients { get; set; }
 
         [Display(Name = "Price 1-50")]
         [Range(1, 1000)]
