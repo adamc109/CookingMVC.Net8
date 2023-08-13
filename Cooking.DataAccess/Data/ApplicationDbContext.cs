@@ -36,8 +36,22 @@ namespace Cooking.DataAccess.Data1
                     Price = 10,
                     Price50 = 8,
                     Price100 = 5,
+                    CategoryId = 2
+
+                },
+                new Recipie
+                {
+                    Id = 2,
+                    Title = "McMuffin",
+                    Ingredients = "sausage burger, bun",
+                    ListPrice = 8,
+                    Price = 8,
+                    Price50 = 7,
+                    Price100 = 3,
+                    CategoryId = 1
 
                 }
+
                 );
         }
 
