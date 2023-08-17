@@ -1,6 +1,7 @@
 ﻿using Cooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using Cooking.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CookingWeb.Areas.Admin.Controllers
 {
@@ -16,12 +17,22 @@ namespace CookingWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Recipie> objRecipieList = _unitOfWork.Recipie.GetAll().ToList();
+
             return View(objRecipieList);
 
         }
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            ViewBag.CategoryList = CategoryList;
+            //ViewData["CategoryList"] = CategoryList;
+
             return View();
         }
         [HttpPost]

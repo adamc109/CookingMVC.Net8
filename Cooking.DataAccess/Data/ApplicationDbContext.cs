@@ -36,7 +36,8 @@ namespace Cooking.DataAccess.Data1
                     Price = 10,
                     Price50 = 8,
                     Price100 = 5,
-                    CategoryId = 2
+                    CategoryId = 2,
+                    ImageURL =""
 
                 },
                 new Recipie
@@ -48,7 +49,8 @@ namespace Cooking.DataAccess.Data1
                     Price = 8,
                     Price50 = 7,
                     Price100 = 3,
-                    CategoryId = 1
+                    CategoryId = 1,
+                    ImageURL = ""
 
                 }
 
