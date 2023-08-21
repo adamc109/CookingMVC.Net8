@@ -1,4 +1,4 @@
-﻿@model Recipie
+﻿@model RecipieVM
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -12,43 +12,48 @@
         <form method="post" class="row">
             <div class="form-floating  py-2 col-12">
                 <div class="mb-3 row p-1">
-                    <label asp-for="Title" class="p-0"></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
+                    <label asp-for="Recipie.Title" class="p-0"></label>
+                    <input asp-for="Recipie.Title" class="form-control" />
+                    <span asp-validation-for="Recipie.Title" class="text-danger"></span>
 
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="Ingredients" class="p-0"></label>
-                    <input asp-for="Ingredients" class="form-control" />
-                    <span asp-validation-for="Ingredients" class="text-danger"></span>
+                    <label asp-for="Recipie.Ingredients" class="p-0"></label>
+                    <input asp-for="Recipie.Ingredients" class="form-control" />
+                    <span asp-validation-for="Recipie.Ingredients" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="ListPrice" class="p-0"></label>
-                    <input asp-for="ListPrice" class="form-control" />
-                    <span asp-validation-for="ListPrice" class="text-danger"></span>
+                    <label asp-for="Recipie.ListPrice" class="p-0"></label>
+                    <input asp-for="Recipie.ListPrice" class="form-control" />
+                    <span asp-validation-for="Recipie.ListPrice" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="Price" class="p-0"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
+                    <label asp-for="Recipie.Price" class="p-0"></label>
+                    <input asp-for="Recipie.Price" class="form-control" />
+                    <span asp-validation-for="Recipie.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="Price50" class="p-0"></label>
-                    <input asp-for="Price50" class="form-control" />
-                    <span asp-validation-for="Price50" class="text-danger"></span>
+                    <label asp-for="Recipie.Price50" class="p-0"></label>
+                    <input asp-for="Recipie.Price50" class="form-control" />
+                    <span asp-validation-for="Recipie.Price50" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="Price100" class="p-0"></label>
-                    <input asp-for="Price100" class="form-control" />
-                    <span asp-validation-for="Price100" class="text-danger"></span>
+                    <label asp-for="Recipie.Price100" class="p-0"></label>
+                    <input asp-for="Recipie.Price100" class="form-control" />
+                    <span asp-validation-for="Recipie.Price100" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row p-1">
-                    <label asp-for="CategoryId" class="p-0"></label>
-                    <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-control p-0">
+                    <label asp-for="Recipie.CategoryId" class="p-0"></label>
+                    <select asp-for="Recipie.CategoryId" asp-items="@Model.CategoryList" class="form-control">
                         <option disabled selected>--Select Category--</option>
                     </select>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="Recipie.ImageURL" class="p-0"></label>
+                        <input asp-for="Recipie.ImageURL" class="form-control" />
+                        <span asp-validation-for="Recipie.ImageURL" class="text-danger"></span>
+                    </div>
 
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    <span asp-validation-for="Recipie.CategoryId" class="text-danger"></span>
                 </div>
                 <div class="row">
                     <div class="col-6 col-md-3">

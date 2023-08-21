@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Cooking.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Cooking.Models.ViewModels;
 
 namespace CookingWeb.Areas.Admin.Controllers
 {
@@ -30,22 +31,39 @@ namespace CookingWeb.Areas.Admin.Controllers
                 Value = u.Id.ToString()
             });
 
-            ViewBag.CategoryList = CategoryList;
-            //ViewData["CategoryList"] = CategoryList;
+   
+            RecipieVM recipieVM = new()
+            {
+                CategoryList = CategoryList,
+                Recipie = new Recipie()
+            };
 
-            return View();
+
+            return View(recipieVM);
         }
         [HttpPost]
-        public IActionResult Create(Recipie obj)
+        public IActionResult Create(RecipieVM recipieVM )
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Recipie.Add(obj);
+                _unitOfWork.Recipie.Add(recipieVM.Recipie);
                 _unitOfWork.Save();
                 TempData["success"] = "Recipie created sucessfully";
                 return RedirectToAction("Index", "Recipie");
             }
-            else return View();
+            else
+            {
+               //Re populates dropdown
+                recipieVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
+                return View(recipieVM);
+            }
+
+
         }
         public IActionResult Edit(int? id)
         {
