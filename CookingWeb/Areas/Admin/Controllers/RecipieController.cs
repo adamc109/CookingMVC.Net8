@@ -11,9 +11,11 @@ namespace CookingWeb.Areas.Admin.Controllers
     {
         //connect to data from Recipie using dbcontext
         private readonly IUnitOfWork _unitOfWork;
-        public RecipieController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public RecipieController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -23,29 +25,52 @@ namespace CookingWeb.Areas.Admin.Controllers
 
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
+
 
    
             RecipieVM recipieVM = new()
             {
-                CategoryList = CategoryList,
-                Recipie = new Recipie()
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                 Recipie = new Recipie()
             };
+            if (id == null || id == 0)
+            {
+                return View(recipieVM);
+            }
+            else
+            {
+                //update
+                recipieVM.Recipie = _unitOfWork.Recipie.Get(u=>u.Id == id);
+                return View(recipieVM);
+            }
 
-
-            return View(recipieVM);
+            
         }
         [HttpPost]
-        public IActionResult Create(RecipieVM recipieVM )
+        public IActionResult Upsert(RecipieVM recipieVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                //file upload of image
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if(file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    using ( var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    recipieVM.Recipie.ImageURL = @"\images\product\" + fileName;
+                }
                 _unitOfWork.Recipie.Add(recipieVM.Recipie);
                 _unitOfWork.Save();
                 TempData["success"] = "Recipie created sucessfully";
@@ -64,35 +89,6 @@ namespace CookingWeb.Areas.Admin.Controllers
             }
 
 
-        }
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-
-            //Recipie? RecipieFromDb = _db.Categories.Find(id);
-            Recipie? RecipieFromDb = _unitOfWork.Recipie.Get(u=>u.Id==id);
-            if (RecipieFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(RecipieFromDb);
-        }
-        [HttpPost]
-        public IActionResult Edit(Recipie obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Recipie.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Recipie Updated Sucessfully";
-
-                return RedirectToAction("Index");
-            }
-            else return View();
         }
         public IActionResult Delete(int? id)
         {
