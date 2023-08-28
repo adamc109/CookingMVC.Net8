@@ -64,6 +64,17 @@ namespace CookingWeb.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
+                    if(!string .IsNullOrEmpty(recipieVM.Recipie.ImageURL))
+                    {
+                        //delete the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, recipieVM.Recipie.ImageURL.TrimStart('/'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     using ( var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -71,7 +82,14 @@ namespace CookingWeb.Areas.Admin.Controllers
 
                     recipieVM.Recipie.ImageURL = @"\images\product\" + fileName;
                 }
-                _unitOfWork.Recipie.Add(recipieVM.Recipie);
+                if(recipieVM.Recipie.Id == 0)
+                {
+                    _unitOfWork.Recipie.Add(recipieVM.Recipie);
+                }
+                else
+                {
+                    _unitOfWork.Recipie.Update(recipieVM.Recipie);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Recipie created sucessfully";
                 return RedirectToAction("Index", "Recipie");

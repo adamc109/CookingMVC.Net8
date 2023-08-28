@@ -11,69 +11,82 @@
     <div class="card-body" p-4>
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="Recipie.Id" hidden />
-            <div class="form-floating  py-2 col-12">
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.Title" class="p-0"></label>
-                    <input asp-for="Recipie.Title" class="form-control" />
-                    <span asp-validation-for="Recipie.Title" class="text-danger"></span>
+            <div class="row">
+                <div class="col-10">
+                    <div class="form-floating  py-2 col-12">
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.Title" class="p-0"></label>
+                            <input asp-for="Recipie.Title" class="form-control" />
+                            <span asp-validation-for="Recipie.Title" class="text-danger"></span>
 
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.Ingredients" class="p-0"></label>
-                    <input asp-for="Recipie.Ingredients" class="form-control">
-                    <span asp-validation-for="Recipie.Ingredients" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.ListPrice" class="p-0"></label>
-                    <input asp-for="Recipie.ListPrice" class="form-control" />
-                    <span asp-validation-for="Recipie.ListPrice" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.Price" class="p-0"></label>
-                    <input asp-for="Recipie.Price" class="form-control" />
-                    <span asp-validation-for="Recipie.Price" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.Price50" class="p-0"></label>
-                    <input asp-for="Recipie.Price50" class="form-control" />
-                    <span asp-validation-for="Recipie.Price50" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.Price100" class="p-0"></label>
-                    <input asp-for="Recipie.Price100" class="form-control" />
-                    <span asp-validation-for="Recipie.Price100" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.CategoryId" class="p-0"></label>
-                    <select asp-for="Recipie.CategoryId" asp-items="@Model.CategoryList" class="form-control">
-                        <option disabled selected>--Select Category--</option>
-                    </select>
-                    <span asp-validation-for="Recipie.CategoryId" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row p-1">
-                    <label asp-for="Recipie.ImageURL" class="p-0"></label>
-                    <input type="file" name="file" class="form-control">
-                  
-                    <span asp-validation-for="Recipie.ImageURL" class="text-danger"></span>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-3">
-                        @if (Model.Recipie.Id != 0)
-                        {
-                            <button type="submit" class="btn btn-primary form-control border-2">Update</button>
-                        }
-                        else{
-                            <button type="submit" class="btn btn-primary form-control border-2">Create</button>
-                        }
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-controller="Recipie" asp-action="Index" class="btn btn-outline-secondary form-control">Back To List
-                        </a>
-                    </div>
-                </div>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.Ingredients" class="p-0"></label>
+                            <input asp-for="Recipie.Ingredients" class="form-control">
+                            <span asp-validation-for="Recipie.Ingredients" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.ListPrice" class="p-0"></label>
+                            <input asp-for="Recipie.ListPrice" class="form-control" />
+                            <span asp-validation-for="Recipie.ListPrice" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.Price" class="p-0"></label>
+                            <input asp-for="Recipie.Price" class="form-control" />
+                            <span asp-validation-for="Recipie.Price" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.Price50" class="p-0"></label>
+                            <input asp-for="Recipie.Price50" class="form-control" />
+                            <span asp-validation-for="Recipie.Price50" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.Price100" class="p-0"></label>
+                            <input asp-for="Recipie.Price100" class="form-control" />
+                            <span asp-validation-for="Recipie.Price100" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.CategoryId" class="p-0"></label>
+                            <select asp-for="Recipie.CategoryId" asp-items="@Model.CategoryList" class="form-control">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <span asp-validation-for="Recipie.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row p-1">
+                            <label asp-for="Recipie.ImageURL" class="p-0"></label>
+                            <input type="file" name="file" class="form-control">
 
+                            <span asp-validation-for="Recipie.ImageURL" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                @if (Model.Recipie.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control border-2">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control border-2">Create</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Recipie" asp-action="Index" class="btn btn-outline-secondary form-control">
+                                    Back To List
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-2">
+                    <img src="@Model.Recipie.ImageURL" width="100%" 
+                    style="border-radius:5px; border:1px solid"/>
+                        
+                </div>
 
             </div>
+
         </form>
     </div>
 </div>
