@@ -19,7 +19,7 @@ namespace CookingWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Recipie> objRecipieList = _unitOfWork.Recipie.GetAll().ToList();
+            List<Recipie> objRecipieList = _unitOfWork.Recipie.GetAll(includeProperties:"Category").ToList();
 
             return View(objRecipieList);
 
