@@ -136,5 +136,15 @@ namespace CookingWeb.Areas.Admin.Controllers
             TempData["success"] = "Recipie Deleted Sucessfully";
             return RedirectToAction("Index");
         }
+
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll() 
+        {
+            List<Recipie> objRecipieList = _unitOfWork.Recipie.GetAll(includeProperties: "Category").ToList();
+            return Json(new {data = objRecipieList});
+        }
+        #endregion
     }
 }
