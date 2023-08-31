@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Cooking.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Cooking.Models.ViewModels;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace CookingWeb.Areas.Admin.Controllers
 {
@@ -108,34 +109,7 @@ namespace CookingWeb.Areas.Admin.Controllers
 
 
         }
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
 
-
-            Recipie? RecipieFromDb = _unitOfWork.Recipie.Get(u => u.Id == id);
-            if (RecipieFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(RecipieFromDb);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
-        {
-            Recipie? obj = _unitOfWork.Recipie.Get(u => u.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            _unitOfWork.Recipie.Remove(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Recipie Deleted Sucessfully";
-            return RedirectToAction("Index");
-        }
 
 
         #region API CALLS
@@ -144,6 +118,27 @@ namespace CookingWeb.Areas.Admin.Controllers
         {
             List<Recipie> objRecipieList = _unitOfWork.Recipie.GetAll(includeProperties: "Category").ToList();
             return Json(new {data = objRecipieList});
+        }
+
+        
+        public IActionResult Delete(int? id)
+        {
+            var productToBeDeleted = _unitOfWork.Recipie.Get(u=> u.Id == id);
+            if (productToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting"});
+            }
+
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageURL.TrimStart('/'));
+
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+
+            _unitOfWork.Recipie.Remove(productToBeDeleted);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Delete Sucessful" });
         }
         #endregion
     }
