@@ -120,7 +120,7 @@ namespace CookingWeb.Areas.Admin.Controllers
             return Json(new {data = objRecipieList});
         }
 
-        
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             var productToBeDeleted = _unitOfWork.Recipie.Get(u=> u.Id == id);
