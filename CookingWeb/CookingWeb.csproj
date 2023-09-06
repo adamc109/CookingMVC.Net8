@@ -15,7 +15,6 @@
     <ProjectReference Include="..\Cooking.DataAccess\Cooking.DataAccess.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
     <Folder Include="wwwroot\images\Product\" />
   </ItemGroup>
   <ItemGroup>
