@@ -18,6 +18,7 @@ namespace Cooking.DataAccess.Data1
         //creates table
         public DbSet<Category> Categories { get; set; }
         public DbSet<Recipie> Recipies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
