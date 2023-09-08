@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Bulky.Models\Cooking.Models.csproj" />
     <ProjectReference Include="..\Cooking.DataAccess\Cooking.DataAccess.csproj" />
+    <ProjectReference Include="..\Cooking.Utility\Cooking.Utility.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images\Product\" />
