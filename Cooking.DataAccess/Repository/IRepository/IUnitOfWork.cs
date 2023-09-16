@@ -10,6 +10,7 @@ namespace Cooking.DataAccess.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IRecipieRepository Recipie { get; }
+        ICompanyRepository Company { get; }
 
         void Save();
     }
