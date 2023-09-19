@@ -33,6 +33,26 @@ namespace Cooking.DataAccess.Data1
                 new Category { Id = 5, Name = "Snack", DisplayOrder = 5 }
                 );
 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Tech Solution", 
+                    StreetAddress="123 Tech St", 
+                    City = "Tech City", 
+                    PostalCode="12121", 
+                    State="IL", 
+                    PhoneNumber = "123456" },
+                new Company { Id = 2,
+                    Name = "Tech Solution",
+                    StreetAddress = "123 Tech St",
+                    City = "Tech City",
+                    PostalCode = "12121",
+                    State = "IL",
+                    PhoneNumber = "123456" }
+
+
+
+                );
+
             modelBuilder.Entity<Recipie>().HasData(
                 new Recipie
                 {

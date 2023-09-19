@@ -10,7 +10,7 @@ using Cooking.Utility;
 namespace CookingWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    //[Authorize(Roles = SD.Role_Admin)]
     public class CompanyController : Controller
     {
         //connect to data from Company using dbcontext
@@ -22,7 +22,7 @@ namespace CookingWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Company> objCompanyList = _unitOfWork.Company.GetAll(includeProperties:"Category").ToList();
+            List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
 
             return View(objCompanyList);
 

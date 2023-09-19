@@ -4,6 +4,7 @@ using Cooking.DataAccess.Data1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cooking.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230919194742_addphonenumber")]
+    partial class addphonenumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,28 +108,6 @@ namespace Cooking.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "123456",
-                            PostalCode = "12121",
-                            State = "IL",
-                            StreetAddress = "123 Tech St"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "123456",
-                            PostalCode = "12121",
-                            State = "IL",
-                            StreetAddress = "123 Tech St"
-                        });
                 });
 
             modelBuilder.Entity("Cooking.Models.Recipie", b =>
@@ -411,10 +392,6 @@ namespace Cooking.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -427,8 +404,6 @@ namespace Cooking.DataAccess.Migrations
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -493,17 +468,6 @@ namespace Cooking.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Cooking.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("Cooking.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

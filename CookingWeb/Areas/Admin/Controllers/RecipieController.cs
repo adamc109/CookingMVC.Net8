@@ -10,7 +10,7 @@ using Cooking.Utility;
 namespace CookingWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    //[Authorize(Roles = SD.Role_Admin)]
     public class RecipieController : Controller
     {
         //connect to data from Recipie using dbcontext

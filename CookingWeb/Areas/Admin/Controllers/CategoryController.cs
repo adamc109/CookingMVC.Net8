@@ -7,7 +7,7 @@ using Cooking.Utility;
 namespace CookingWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    //[Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         //connect to data from category using dbcontext
