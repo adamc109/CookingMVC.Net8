@@ -11,6 +11,8 @@ namespace Cooking.DataAccess.Repository.IRepository
         ICategoryRepository Category { get; }
         IRecipieRepository Recipie { get; }
         ICompanyRepository Company { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
 
         void Save();
     }
