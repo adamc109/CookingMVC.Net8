@@ -1,7 +1,9 @@
 ﻿using Cooking.DataAccess.Repository.IRepository;
 using Cooking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace CookingWeb.Area.Customer.Controllers
 {
@@ -26,9 +28,35 @@ namespace CookingWeb.Area.Customer.Controllers
 
         public IActionResult Details(int recipieid)
         {
-            Recipie recipie = _unitOfWork.Recipie.Get(u=>u.Id== recipieid, includeProperties: "Category");
-            return View(recipie);
+            ShoppingCart cart = new()
+            {
+                Recipie = _unitOfWork.Recipie.Get(u => u.Id == recipieid, includeProperties: "Category"),
+                Count = 1,
+                RecipieId = recipieid
+
+
+            };
+            
+            return View(cart);
         }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+  
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            _unitOfWork.ShoppingCart.Add(shoppingCart);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+            
+        }
+
+
+
+        
 
         public IActionResult Privacy()
         {
