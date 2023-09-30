@@ -1,4 +1,5 @@
 ﻿using Cooking.DataAccess.Repository.IRepository;
+using Cooking.Models;
 using Cooking.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,33 @@ namespace CookingWeb.Areas.Customer.Controllers
                 includeProperties: "Recipie")
             };
 
+            foreach( var cart in ShoppingCartVM.ShoppingCartList )
+            {
+                cart.Price = GetPriceBasedOnQuantity(cart);
+                ShoppingCartVM.OrderTotal += (cart.Price * cart.Count);
+            }
             return View(ShoppingCartVM);
+          
+        }
+
+        private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
+        {
+            if (shoppingCart.Count <= 50)
+            {
+                return shoppingCart.Recipie.Price;
+            }
+            else
+            {
+                if (shoppingCart.Count <= 100)
+                {
+                    return shoppingCart.Recipie.Price50;
+                }
+
+                else
+                {
+                    return shoppingCart.Recipie.Price100;
+                }
+            }        
         }
     }
 }
