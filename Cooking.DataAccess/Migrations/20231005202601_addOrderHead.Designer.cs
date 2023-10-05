@@ -4,6 +4,7 @@ using Cooking.DataAccess.Data1;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cooking.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005202601_addOrderHead")]
+    partial class addOrderHead
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,10 +158,10 @@ namespace Cooking.DataAccess.Migrations
 
                     b.HasIndex("RecipieId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetail");
                 });
 
-            modelBuilder.Entity("Cooking.Models.OrderHeader", b =>
+            modelBuilder.Entity("Cooking.Models.OrderHeaders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -564,7 +567,7 @@ namespace Cooking.DataAccess.Migrations
 
             modelBuilder.Entity("Cooking.Models.OrderDetail", b =>
                 {
-                    b.HasOne("Cooking.Models.OrderHeader", "OrderHeader")
+                    b.HasOne("Cooking.Models.OrderHeaders", "OrderHeader")
                         .WithMany()
                         .HasForeignKey("OrderHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,7 +584,7 @@ namespace Cooking.DataAccess.Migrations
                     b.Navigation("Recipie");
                 });
 
-            modelBuilder.Entity("Cooking.Models.OrderHeader", b =>
+            modelBuilder.Entity("Cooking.Models.OrderHeaders", b =>
                 {
                     b.HasOne("Cooking.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
