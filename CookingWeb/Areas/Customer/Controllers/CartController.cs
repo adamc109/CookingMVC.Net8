@@ -4,6 +4,7 @@ using Cooking.Models.ViewModels;
 using Cooking.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace CookingWeb.Areas.Customer.Controllers
@@ -129,9 +130,45 @@ namespace CookingWeb.Areas.Customer.Controllers
             {
                 //it is a regular customer account and we need to capute payment
                 //stripe logic
-                
-            }
 
+
+
+            }
+            var domain = "https://localhost:7009/";
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain+ $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
+                CancelUrl = domain+"customer/cart/index",
+                LineItems = new List<SessionLineItemOptions>()
+                  {
+                    new SessionLineItemOptions
+                    {
+                      Price = "price_H5ggYwtDq4fbrJ",
+                      Quantity = 2,
+                    },
+                  },
+                Mode = "payment",
+            };
+
+            foreach (var item in ShoppingCartVM.ShoppingCartList) {
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions()
+                    {
+                        UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions()
+                        {
+                            Name = item.Recipie.Title
+                        }
+                    },
+                    Quantity = item.Count
+                };
+                    }
+
+
+            var service = new SessionService();
+            service.Create(options);
 
 
             return RedirectToAction(nameof(OrderConfirmation), new { id=ShoppingCartVM.OrderHeader.Id}) ;
